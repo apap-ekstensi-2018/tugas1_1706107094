@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<base href="/" />
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/font-awesome/css/font-awesome.min.css"></link>
+<!-- Bootstrap Date-Picker Plugin -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+  <link rel="stylesheet" href="/resources/demos/style.css"></link>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  }
+  } );
+  </script>
+<div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+
+	<h1 class="page-header">Tambah Mahasiswa</h1>
+	<form th:action="@{${linkSubmit}}" method="post" th:object="${mahasiswa}">
+				<div class="form-group">
+<input th:field="*{id}" hidden="true"/>
+				<input th:field="*{npm}" hidden="true"/>
+
+			<label for="usr">Nama Lengkap:</label> <input type="text"
+				class="form-control" id="nama" th:field="*{nama}"></input>
+		</div>
+
+		<div class="form-group">
+
+			<label for="usr">Tempat Lahir:</label> <input type="text"
+				class="form-control" id="tempat_lahir" th:field="*{tempat_lahir}"></input>
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Tanggal Lahir:</label><input
+					type="text" class="form-control" name="tanggal_lahir" th:field="*{tanggal_lahir}" /> <br />
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Jenis Kelamin:</label> 
+			
+   			<select class="custom-select" th:field="*{jenis_kelamin}">
+							<option th:each="data, i : ${options_jk}"  th:attr="selected=(*{jenis_kelamin} == ${data})" th:value="${i.index}" th:text="${data}"></option>
+						</select>
+   		
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Agama:</label>
+			<select class="custom-select" th:field="*{agama}">
+							<option th:each="data : ${options_agama}" th:attr="selected=(*{agama} == ${data})" th:value="${data}" th:text="${data}"></option>
+						</select>
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Golongan Darah:</label> 
+				<select class="custom-select" th:field="*{golongan_darah}">
+							<option th:each="data : ${options_goldar}"  th:attr="selected=(*{golongan_darah} == ${data})" th:value="${data}" th:text="${data}"></option>
+						</select>
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Tahun Masuk:</label> <input type="text"
+				class="form-control" id="tempat_lahir" th:field="*{tahun_masuk}"></input>
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Jalur Masuk:</label> 
+			<select class="custom-select" th:field="*{jalur_masuk}">
+							<option th:each="data : ${options_jalur_masuk}"  th:attr="selected=(*{jalur_masuk} == ${data})" th:value="${data}" th:text="${data}"></option>
+						</select>
+		</div>
+			<div class="form-group">
+
+			<label for="usr">Id Program Studi:</label> 
+			<select class="form-control" id="prodi" th:field="*{id_prodi}">
+			
+			<option th:each="data : ${prodis}"  th:attr="selected=(*{id_prodi} == ${data.id})" th:value="${data.id}" th:text="${data.nama_prodi}"></option>
+			</select>
+				
+		</div>
+		<div>
+			<button type="submit" name="action" value="save">Save</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
